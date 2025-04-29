@@ -47,9 +47,9 @@ def cutout_mask(batch, n_patches = 3):
     mask = ~mask
     return batch * mask, mask
 
-def save_ssrgan(ssrgan, model_name):
-    torch.save(ssrgan.models.generator.state_dict(), f"./trained_models/SSRGAN_generator_{model_name}.pt")
-    torch.save(ssrgan.models.discriminator.state_dict(), f"./trained_models/SSRGAN_discriminator_{model_name}.pt")
+def save_ssrgan(ssrgan, directory, model_name):
+    torch.save(ssrgan.models.generator.state_dict(), f"{directory}/SSRGAN_generator_{model_name}.pt")
+    torch.save(ssrgan.models.discriminator.state_dict(), f"{directory}/SSRGAN_discriminator_{model_name}.pt")
 
 def show_restored(generator, batch, param_grid = torch.linspace(0, 9, 10), how = "random"):
     if how == "random":

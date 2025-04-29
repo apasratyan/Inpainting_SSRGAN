@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader
 
 import matplotlib.pyplot as plt
 from munch import Munch
+import os
 
 from source.dataset import FolderDataset
 from source.utils import *
@@ -13,12 +14,14 @@ from source.models import *
 
 def ssrgan_pipeline(dataset_name,
                     dataset_path,
-                    test_size,
+                    save_path,
+                    test_size = 0.5,
                     ssrgan_type = "vanilla",
                     mask = "random",
-                    model_size = 64,
                     p = 0.5,
                     n_patches = 3,
+                    model_size = 64,
+                    loss_function = "mse",
                     n_epochs = 100,
                     optimizer = "adam",
                     initial_lr = 2e-4,
@@ -71,10 +74,13 @@ def ssrgan_pipeline(dataset_name,
     ssrgan.schedulers.generator = optim.lr_scheduler.StepLR(ssrgan.optims.generator, step_size = scheduler_step_size, gamma = scheduler_gamma)
     ssrgan.schedulers.discriminator = optim.lr_scheduler.StepLR(ssrgan.optims.discriminator, step_size = scheduler_step_size, gamma = scheduler_gamma)
 
-    train(ssrgan.models, ssrgan.optims, loaders, logs, mask, device, p = p, n_patches = n_patches, n_epochs = n_epochs, schedulers = ssrgan.schedulers)
+    train(ssrgan.models, ssrgan.optims, loaders, logs, mask, device, loss_function = loss_function, p = p, n_patches = n_patches, n_epochs = n_epochs, schedulers = ssrgan.schedulers)
 
+    if not os.path.isdir(save_path):
+        os.mkdir(save_path)
+    
     model_name = dataset_name + "_" + ssrgan_type + "_" + str(model_size) + "_" + mask
-    save_ssrgan(ssrgan, model_name)
+    save_ssrgan(ssrgan, save_path, model_name)
 
     plt.figure(figsize = (20, 10))
     plt.grid()
@@ -84,7 +90,7 @@ def ssrgan_pipeline(dataset_name,
     plt.xlabel("epoch")
     plt.ylabel("NMSE")
     plt.legend()
-    plt.savefig(f"./trained_models/NMSE_log_charts/{model_name}_NMSE_log.png")
+    plt.savefig(f"{save_path}/{model_name}_NMSE_log.png")
 
 def loading_pipeline(dataset_name,
                      device,
