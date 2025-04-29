@@ -25,6 +25,10 @@ __ssrgan_pipeline__ args breakdown:
     dataset_path: str
   
   Path to dataset. Must be a path to a .jpg image folder.
+
+    save_path : str
+
+  Directory for saving the trained model and NMSE graph.
     
     test_size: float(0, 1) = 0.5
   
