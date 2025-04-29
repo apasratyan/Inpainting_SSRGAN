@@ -4,7 +4,7 @@ A realization of an inpainting SSRGAN model from [__Image inpainting for corrupt
 
 Find datasets used [here.](https://drive.google.com/file/d/12D4DpgXUz6b7PRP61MVfay990zLuRgZh/view?usp=sharing)
 
-Find trained model weights here. (placeholder dw)
+Find trained model weights [here.](https://drive.google.com/file/d/1xV5LqeHM7d2GhkZu0xgpfkrByaquH1mY/view?usp=sharing)
 
 VGGLoss realization taken from [this repo.](https://github.com/crowsonkb/vgg_loss)
 
