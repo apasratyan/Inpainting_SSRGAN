@@ -6,6 +6,8 @@ Find datasets used [here.](https://drive.google.com/file/d/12D4DpgXUz6b7PRP61MVf
 
 Find trained model weights here. (placeholder dw)
 
+VGGLoss realization taken from [this repo.](https://github.com/crowsonkb/vgg_loss)
+
 
 How to use:
 
